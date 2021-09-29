@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter()
-    }
-}
-rootProject.name = "android-v3-migration"
-include(":app")
-include(":v3-beta-migration")
+package com.google.maps.android.v3.migration
 
-pluginManagement {
-    repositories {
-        mavenLocal()
-        maven(url = "./v3-beta-migration/build/repository")
-        gradlePluginPortal()
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.libraries.maps.SupportMapFragment
+
+class SampleActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.basic_demo)
+
+        val mapFragment: SupportMapFragment? =
+            supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync {
+            // Do something with map
+        }
     }
 }
