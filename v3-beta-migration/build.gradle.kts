@@ -16,6 +16,7 @@ plugins {
     id("java-gradle-plugin")
     id("kotlin")
     id("maven-publish")
+    id("com.gradle.plugin-publish") version "0.14.0"
 }
 
 dependencies {
@@ -84,6 +85,12 @@ publishing {
         }
         mavenLocal()
     }
+}
+
+pluginBundle {
+    website = PluginInfo.url
+    vcsUrl = PluginInfo.url
+    tags = listOf("kotlin", "android", "maps")
 }
 
 project(":v3-beta-migration") {
