@@ -7,7 +7,7 @@ Maps V3 Migration Tool
 
 A tool to assist with migrating from the deprecated [Beta version](https://developers.google.com/maps/documentation/android-sdk/v310-beta) of the Maps SDK for Android to the version distributed on Google Play services.
 
-See the [release notes](https://developers.google.com/maps/documentation/android-sdk/releases#august_18_2021)) for more context.
+See the [release notes](https://developers.google.com/maps/documentation/android-sdk/releases#august_18_2021) for more context.
 
 ## Installation
 
