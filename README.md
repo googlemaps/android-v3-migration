@@ -11,6 +11,8 @@ See the [release notes](https://developers.google.com/maps/documentation/android
 
 ## Installation
 
+_Note: This plugin is currently pending approval (See [#1](/../../issues/1))_
+
 In your app-level `build.gradle` file:
 
 ```groovy
