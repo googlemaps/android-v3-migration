@@ -86,17 +86,17 @@ class V3BetaMigrationPlugin : Plugin<Project> {
                             // Handle '...maps:$versionString'
                             .replace(v3VersionStringRegex, gmsMavenCoordinate)
 
-                            // Handle 'maps-sdk-3.0.0-beta...
-                            .replace(v3MapsAarStringGroovyRegex, gmsMavenCoordinate)
+                            // Handle 'name: 'maps-sdk-3.0.0-beta...
+                            .replace(v3MapsAarStringGroovyRegex, "'$gmsMavenCoordinate'")
 
                             // Handle 'file("maps-sdk-3.0.0-beta.aar")'
-                            .replace(v3MapsAarStringKtsRegex, gmsMavenCoordinate)
+                            .replace(v3MapsAarStringKtsRegex, "\"$gmsMavenCoordinate\"")
 
                             // Handle 'places-maps-sdk-3.1.0-beta...
-                            .replace(v3PlacesAarStringGroovyRegex, placesMavenCoordinate)
+                            .replace(v3PlacesAarStringGroovyRegex, "'$placesMavenCoordinate'")
 
                             // Handle 'file("places-maps-sdk-3.0.0-beta.aar")'
-                            .replace(v3PlacesAarStringKtsRegex, placesMavenCoordinate)
+                            .replace(v3PlacesAarStringKtsRegex, "\"$placesMavenCoordinate\"")
                     }
                 }
                 task.into("./$tempFolderName")

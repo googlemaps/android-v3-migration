@@ -16,6 +16,7 @@ package com.google.android.libraries.mapsplatform.v3_beta_migration
 
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
@@ -34,6 +35,19 @@ class V3BetaMigrationPluginTest {
     lateinit var root: Project
     lateinit var project: Project
     lateinit var projectFolder: File
+
+    private fun expectedGroovyString(quote: String = "'") =
+        """
+            dependencies {
+            implementation $quote$gmsMavenCoordinate$quote
+            }
+        """.trimIndent()
+    private val expectedKtsString =
+        """
+            dependencies {
+            implementation("$gmsMavenCoordinate")
+            }
+        """.trimIndent()
 
     @Before
     fun setUp() {
@@ -77,9 +91,7 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(gmsMavenCoordinate)
-        )
+        assertEquals(expectedGroovyString(), buildGradle.readText())
     }
 
     @Test
@@ -93,9 +105,7 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(gmsMavenCoordinate)
-        )
+        assertEquals(expectedGroovyString(), buildGradle.readText())
     }
 
     @Test
@@ -109,9 +119,7 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(gmsMavenCoordinate)
-        )
+        assertEquals(expectedGroovyString(quote = "\""), buildGradle.readText())
     }
 
     @Test
@@ -125,8 +133,13 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(placesMavenCoordinate)
+        assertEquals(
+            """
+                dependencies {
+                implementation '$placesMavenCoordinate'
+                }
+            """.trimIndent(),
+            buildGradle.readText()
         )
     }
 
@@ -141,8 +154,13 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(placesMavenCoordinate)
+        assertEquals(
+            """
+                dependencies {
+                implementation("$placesMavenCoordinate")
+                }
+            """.trimIndent(),
+            buildGradle.readText()
         )
     }
 
@@ -157,9 +175,7 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(gmsMavenCoordinate)
-        )
+        assertEquals(expectedKtsString, buildGradle.readText())
     }
 
     @Test
@@ -173,9 +189,7 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(gmsMavenCoordinate)
-        )
+        assertEquals(expectedKtsString, buildGradle.readText())
     }
 
     @Test
@@ -189,9 +203,7 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(
-            buildGradle.readText().contains(gmsMavenCoordinate)
-        )
+        assertEquals(expectedKtsString, buildGradle.readText())
     }
 
     @Test
@@ -212,17 +224,8 @@ class V3BetaMigrationPluginTest {
 
     @Test
     fun `java files are correctly replaced`() {
-        val tempFile = File(projectFolder, "Test.java")
+        val tempFile = File(projectFolder, "Test2.java")
         tempFile.writeText(
-            """
-                // This is a comment
-                class Test {
-                }
-            """.trimIndent()
-        )
-
-        val tempFile2 = File(projectFolder, "Test2.java")
-        tempFile2.writeText(
             """
                 // This is a comment
                 import ${v3BetaPackageName}.GoogleMaps
@@ -232,22 +235,22 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(tempFile2.readText().contains(gmsPackageName))
+        assertEquals(
+            """
+                // This is a comment
+                import ${gmsPackageName}.GoogleMaps
+                // This is a comment
+                class Test2 {
+                }
+            """.trimIndent(),
+            tempFile.readText()
+        )
     }
 
     @Test
     fun `kotlin files are correctly replaced`() {
-        val tempFile = File(projectFolder, "Test.kt")
+        val tempFile = File(projectFolder, "Test2.kt")
         tempFile.writeText(
-            """
-                // This is a comment
-                class Test {
-                }
-            """.trimIndent()
-        )
-
-        val tempFile2 = File(projectFolder, "Test2.kt")
-        tempFile2.writeText(
             """
                 // This is a comment
                 import ${v3BetaPackageName}.GoogleMaps
@@ -257,7 +260,16 @@ class V3BetaMigrationPluginTest {
             """.trimIndent()
         )
         runTasks()
-        assertTrue(tempFile2.readText().contains(gmsPackageName))
+        assertEquals(
+            """
+                // This is a comment
+                import ${gmsPackageName}.GoogleMaps
+                // This is a comment
+                class Test2 {
+                }
+            """.trimIndent(),
+            tempFile.readText()
+        )
     }
 
     @Test
@@ -272,17 +284,17 @@ class V3BetaMigrationPluginTest {
                 android:name="${v3BetaPackageName}.SupportMapFragment" />
             """.trimIndent()
         )
-
-        val tempFile2 = File(projectFolder, "test2.xml")
-        tempFile2.writeText(
-            """
-                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_height="match_parent"
-                android:id="@+id/map" />
-            """.trimIndent()
-        )
         runTasks()
-        assertTrue(tempFile.readText().contains(gmsPackageName))
+        assertEquals(
+            """
+                <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/map"
+                android:name="${gmsPackageName}.SupportMapFragment" />
+            """.trimIndent(),
+            tempFile.readText()
+        )
     }
 
     private fun runTasks() {
