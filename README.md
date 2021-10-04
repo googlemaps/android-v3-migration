@@ -2,8 +2,8 @@
 [![Discord](https://img.shields.io/discord/676948200904589322)](https://discord.gg/hYsWbmk)
 ![Apache-2.0](https://img.shields.io/badge/license-Apache-blue)
 
-Maps V3 Migration Tool
-======================
+Maps V3 BETA Migration Tool
+===========================
 
 A tool to assist with migrating from the deprecated [Beta version](https://developers.google.com/maps/documentation/android-sdk/v310-beta) of the Maps SDK for Android to the version distributed on Google Play services.
 
