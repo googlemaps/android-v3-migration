@@ -11,8 +11,6 @@ See the [release notes](https://developers.google.com/maps/documentation/android
 
 ## Installation
 
-_Note: This plugin is currently pending approval (See [#1](/../../issues/1))_
-
 In your app-level `build.gradle` file, include this plugin:
 
 ```groovy
@@ -20,6 +18,8 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.v3-beta-migration' version '0.1.0'
 }
 ```
+
+See the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/com.google.android.libraries.mapsplatform.v3-beta-migration) page for an alternative legacy installation option.
 
 ## Usage
 
