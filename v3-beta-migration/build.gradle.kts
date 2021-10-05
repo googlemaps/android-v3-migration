@@ -17,6 +17,7 @@ plugins {
     id("kotlin")
     id("maven-publish")
     id("com.gradle.plugin-publish") version "0.14.0"
+    id("jacoco")
 }
 
 dependencies {
