@@ -13,7 +13,7 @@ See the [release notes](https://developers.google.com/maps/documentation/android
 
 _Note: This plugin is currently pending approval (See [#1](/../../issues/1))_
 
-In your app-level `build.gradle` file:
+In your app-level `build.gradle` file, include this plugin:
 
 ```groovy
 plugins {
@@ -23,11 +23,9 @@ plugins {
 
 ## Usage
 
-```
-./gradlew mapsV3BetaMigration
-```
-
-Once migration has been completed, you can remove this plugin from your `build.gradle` file.
+1. Run the migration: `./gradlew mapsV3BetaMigration`
+2. Build and run your app
+3. Remove this plugin from your `build.gradle` file
 
 ## Support
 
