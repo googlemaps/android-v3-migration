@@ -106,5 +106,5 @@ object PluginInfo {
     const val displayName = "Maps SDK V3 BETA Migration Tool"
     const val description = "A Gradle plugin to migrate from Maps SDK V3 BETA to Maps SDK in Google Play Services."
     const val url = "https://github.com/googlemaps/android-v3-migration"
-    const val version = "0.1.0"
+    const val version = "0.2.0"
 }
