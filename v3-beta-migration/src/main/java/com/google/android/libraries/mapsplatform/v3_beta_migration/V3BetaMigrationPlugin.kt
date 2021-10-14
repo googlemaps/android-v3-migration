@@ -55,6 +55,13 @@ class V3BetaMigrationPlugin : Plugin<Project> {
     private val v3PlacesAarStringGroovyRegex = aarRegex(aarName = placesAarName)
     private val v3PlacesAarStringKtsRegex = aarRegex(aarName = placesAarName, isKts = true)
 
+    private val v3MapsKtx = "maps-v3-ktx"
+    private val v3MapsUtilsKtx = "maps-utils-v3-ktx"
+    private val v3PlacesKtx = "places-v3-ktx"
+    private val mapsKtx = "maps-ktx"
+    private val mapsUtilsKtx = "maps-utils-ktx"
+    private val placesKtx = "places-ktx"
+
     private val v3VersionStringRegex = Regex(
         "${v3BetaPackageName}:maps:\\$[a-zA-Z_][a-zA-Z_0-9]*"
     )
@@ -97,6 +104,15 @@ class V3BetaMigrationPlugin : Plugin<Project> {
 
                             // Handle 'file("places-maps-sdk-3.0.0-beta.aar")'
                             .replace(v3PlacesAarStringKtsRegex, "\"$placesMavenCoordinate\"")
+
+                            // Handle 'maps-v3-ktx'
+                            .replace(v3MapsKtx, mapsKtx)
+
+                            // Handle 'maps-utils-v3-ktx'
+                            .replace(v3MapsUtilsKtx, mapsUtilsKtx)
+
+                            // Handle 'places-v3-ktx'
+                            .replace(v3PlacesKtx, placesKtx)
                     }
                 }
                 task.into("./$tempFolderName")

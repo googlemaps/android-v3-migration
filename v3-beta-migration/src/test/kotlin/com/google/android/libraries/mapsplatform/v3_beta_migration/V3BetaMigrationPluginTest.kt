@@ -144,6 +144,132 @@ class V3BetaMigrationPluginTest {
     }
 
     @Test
+    fun `groovy - maps ktx is corrected migrated`() {
+        val buildGradle = File(projectFolder, "build.gradle")
+        buildGradle.writeText(
+            """
+                dependencies {
+                    implementation 'com.google.maps.android:maps-v3-ktx:3.2.0'
+                }
+            """.trimIndent()
+        )
+        runTasks()
+        assertEquals(
+            """
+                dependencies {
+                    implementation 'com.google.maps.android:maps-ktx:3.2.0'
+                }
+            """.trimIndent(),
+            buildGradle.readText()
+        )
+    }
+
+    @Test
+    fun `groovy - maps utils ktx is corrected migrated`() {
+        val buildGradle = File(projectFolder, "build.gradle")
+        buildGradle.writeText(
+            """
+                dependencies {
+                    implementation 'com.google.maps.android:maps-utils-v3-ktx:3.2.0'
+                }
+            """.trimIndent()
+        )
+        runTasks()
+        assertEquals(
+            """
+                dependencies {
+                    implementation 'com.google.maps.android:maps-utils-ktx:3.2.0'
+                }
+            """.trimIndent(),
+            buildGradle.readText()
+        )
+    }
+
+    @Test
+    fun `groovy - places ktx is corrected migrated`() {
+        val buildGradle = File(projectFolder, "build.gradle")
+        buildGradle.writeText(
+            """
+                dependencies {
+                    implementation 'com.google.maps.android:places-v3-ktx:1.0.0'
+                }
+            """.trimIndent()
+        )
+        runTasks()
+        assertEquals(
+            """
+                dependencies {
+                    implementation 'com.google.maps.android:places-ktx:1.0.0'
+                }
+            """.trimIndent(),
+            buildGradle.readText()
+        )
+    }
+
+    @Test
+    fun `kts - maps ktx is corrected migrated`() {
+        val buildGradle = File(projectFolder, "build.gradle")
+        buildGradle.writeText(
+            """
+                dependencies {
+                implementation("com.google.maps.android:maps-v3-ktx:3.2.0")
+                }
+            """.trimIndent()
+        )
+        runTasks()
+        assertEquals(
+            """
+                dependencies {
+                implementation("com.google.maps.android:maps-ktx:3.2.0")
+                }
+            """.trimIndent(),
+            buildGradle.readText()
+        )
+    }
+
+    @Test
+    fun `kts - maps utils ktx is corrected migrated`() {
+        val buildGradle = File(projectFolder, "build.gradle")
+        buildGradle.writeText(
+            """
+                dependencies {
+                implementation("com.google.maps.android:maps-utils-v3-ktx:3.2.0")
+                }
+            """.trimIndent()
+        )
+        runTasks()
+        assertEquals(
+            """
+                dependencies {
+                implementation("com.google.maps.android:maps-utils-ktx:3.2.0")
+                }
+            """.trimIndent(),
+            buildGradle.readText()
+        )
+    }
+
+    @Test
+    fun `kts - places ktx is corrected migrated`() {
+        val buildGradle = File(projectFolder, "build.gradle")
+        buildGradle.writeText(
+            """
+                dependencies {
+                implementation("com.google.maps.android:places-v3-ktx:1.0.0")
+                }
+            """.trimIndent()
+        )
+        runTasks()
+        assertEquals(
+            """
+                dependencies {
+                implementation("com.google.maps.android:places-ktx:1.0.0")
+                }
+            """.trimIndent(),
+            buildGradle.readText()
+        )
+    }
+
+    @Test
     fun `kts - places maps beta is correctly migrated`() {
         val buildGradle = File(projectFolder, "build.gradle")
         buildGradle.writeText(
