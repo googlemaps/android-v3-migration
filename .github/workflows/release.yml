@@ -33,6 +33,8 @@ jobs:
         gpg --quiet --output $GITHUB_WORKSPACE/release.gpg --dearmor ./release.asc
 
         echo "Build and publish"
+        sed -i -e "s,gradle.publish.key=,gradle.publish.key=$GRADLE_PUB_KEY,g" gradle.properties
+        sed -i -e "s,gradle.publish.secret=,gradle.publish.secret=$GRADLE_PUB_SEC,g" gradle.properties
         sed -i -e "s,sonatypeUsername=,sonatypeUsername=$SONATYPE_USERNAME,g" gradle.properties
         SONATYPE_PASSWORD_ESCAPED=$(printf '%s\n' "$SONATYPE_PASSWORD" | sed -e 's/[\/&]/\\&/g')
         sed -i -e "s,sonatypePassword=,sonatypePassword=$SONATYPE_PASSWORD_ESCAPED,g" gradle.properties
@@ -45,6 +47,8 @@ jobs:
         GPG_PASSWORD: ${{ secrets.SYNCED_GPG_KEY_PASSWORD }}
         SONATYPE_PASSWORD: ${{ secrets.SYNCED_SONATYPE_PASSWORD }}
         SONATYPE_USERNAME: ${{ secrets.SYNCED_SONATYPE_USERNAME }}
+        GRADLE_PUB_KEY: ${{ secrets.GRADLE_PUB_KEY }}
+        GRADLE_PUB_SEC: ${{ secrets.GRADLE_PUB_SEC }}
     - name: Semantic Release
       uses: cycjimmy/semantic-release-action@v2
       with:
