@@ -18,7 +18,7 @@ plugins:
       publishCmd: "./gradlew publishPlugins --warn --stacktrace"
   - - "@semantic-release/git"
     - assets:
-        - "./build.gradle(.kts)?"
+        - "build.gradle(.kts)?"
         - "*.md"
   - "@semantic-release/github"
 options:
