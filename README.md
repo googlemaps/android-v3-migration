@@ -15,7 +15,7 @@ In your app-level `build.gradle` file, include this plugin:
 
 ```groovy
 plugins {
-    id 'com.google.android.libraries.mapsplatform.v3-beta-migration' version '0.1.0'
+    id 'com.google.android.libraries.mapsplatform.v3-beta-migration' version '0.2.0'
 }
 ```
 
