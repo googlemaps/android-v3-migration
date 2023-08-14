@@ -5,6 +5,9 @@
 Maps V3 BETA Migration Tool
 ===========================
 
+> [!NOTE]
+> This library is frozen. The Maps SDK for Android [v3 Beta has been decommissioned](https://developers.google.com/maps/documentation/android-sdk/release-notes#august_18_2021) since late 2002.
+
 A tool to assist with migrating from the deprecated [Beta version](https://developers.google.com/maps/documentation/android-sdk/v310-beta) of the Maps SDK for Android to the version distributed on Google Play services.
 
 See the [release notes](https://developers.google.com/maps/documentation/android-sdk/releases#august_18_2021) for more context.
